@@ -1,1 +1,3 @@
 *.ovpn
+openvpn_data/*
+openvpn_data/.*
