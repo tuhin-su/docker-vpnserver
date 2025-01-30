@@ -1,0 +1,16 @@
+services:
+  openvpn:
+    image: kylemanna/openvpn
+    container_name: openvpn-server
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - ./openvpn_data:/etc/openvpn
+      - ./commands:/etc/openvpn/commands
+      - ./conf:/etc/openvpn/conf
+    environment:
+      - port_forward=true
+      - OVPN_DATA=ovpn-data
+      - OVPN_SERVER_URL=udp://${OVPN_SERVER_URL}
+    restart: unless-stopped
+    command: bash /etc/openvpn/commands/stratup.sh
